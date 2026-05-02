@@ -1,3 +1,4 @@
+import ContadorVentas from "../components/ContadorVentas";
 import ServicioCard from "../components/ServicioCard";
 
 function PanelGeneral(){
@@ -6,6 +7,7 @@ function PanelGeneral(){
             <h1>Panel General</h1>
             <p>Bienvenido al sistema. Aqui estan las estadisticas de hoy.</p>
             <ServicioCard />
+            <ContadorVentas />
         </div>
     );
 }
