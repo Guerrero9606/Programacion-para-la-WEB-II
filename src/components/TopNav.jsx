@@ -1,3 +1,4 @@
+import BuscadorEnVivo from './BuscadorEnVivo';
 import './TopNav.css';
 
 function TopNav () {
@@ -6,7 +7,7 @@ function TopNav () {
     return(
         <header className='topnav'>
             <div className='buscardor'>
-                <input type="text" placeholder='Buscar...' className='input-buscar' />
+                <BuscadorEnVivo/>
             </div>
             <div className='perfil-usuario'>
                 <span className='notificaciones'>🔔</span>
