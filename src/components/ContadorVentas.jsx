@@ -1,7 +1,16 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function ContadorVentas(){
-    const [ventas, setVentas ] = useState(0);
+    const [ventas, setVentas ] = useState(()=>{
+        const datoGuardado = localStorage.getItem('ventasDelDia');
+        return datoGuardado ? parseInt(datoGuardado) : 0;
+    });
+
+    useEffect(()=>{
+        localStorage.setItem('ventasDelDia', ventas);
+        document.title = `Ventas ${ventas}`;
+        console.log(`Guardado automatico: Ventas = ${ventas}`);
+    },[ventas]);
 
     const registrarVenta = ( ) => {
         setVentas(ventas+1);
@@ -9,6 +18,7 @@ function ContadorVentas(){
 
     const reiniciar = ()=>{
         setVentas(0);
+        localStorage.removeItem('ventasDelDia');
     };
 
     return(
