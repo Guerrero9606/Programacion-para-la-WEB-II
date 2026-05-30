@@ -2,9 +2,12 @@ import { useContext } from 'react';
 import BuscadorEnVivo from './BuscadorEnVivo';
 import './TopNav.css';
 import { AuthContext } from '../context/AuthContext';
+import { FavoritosContext } from '../context/FavoritosContext';
+import { Link } from 'react-router-dom';
 
 function TopNav () {
     const { usuario } = useContext(AuthContext);
+    const { favoritos } = useContext(FavoritosContext);
     //const usuarioActual = "Juan Perez";
 
     return(
@@ -13,6 +16,9 @@ function TopNav () {
                 <BuscadorEnVivo/>
             </div>
             <div className='perfil-usuario'>
+                <Link to="/favoritos" className='link-favoritos'>
+                    ⭐ Favoritos: <span style={{ color: '#ef4444'}}>{favoritos.length}</span>
+                </Link>
                 <span className='notificaciones'>🔔</span>
                 {usuario.conectado ? (
                     <>
