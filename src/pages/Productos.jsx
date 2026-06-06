@@ -1,3 +1,4 @@
+import InventarioMongo from "../components/InventarioMongo";
 import ProductoCard from "../components/ProductoCard";
 
 function Productos () {
@@ -11,10 +12,19 @@ function Productos () {
     return(
         <div>
             <h1>🛍️ Gestión de Productos</h1>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'20px' }}>
+            {/* <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap:'20px' }}>
                 {baseDatosProductos.map((prod)=>(
                     <ProductoCard key={prod.id} producto={prod}/>
                 ))}
+            </div> */}
+            <div style={{
+                display: 'flex', 
+                gap: '40px', 
+                marginTop: '20px'}}>
+                    <div>Funcion de agregar</div>
+                    <div style={{flexGrow: 1}}>
+                        <InventarioMongo/>
+                    </div>
             </div>
         </div>
     );
