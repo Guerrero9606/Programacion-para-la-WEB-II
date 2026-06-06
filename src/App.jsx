@@ -5,6 +5,7 @@ import NotFound from './pages/NotFound';
 import Productos from './pages/Productos';
 import UsuariosLista from './pages/UsuariosLista';
 import UsuarioDetalle from './pages/UsuarioDetalle';
+import Favoritos from './pages/Favoritos';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/productos" element={<Productos />} />
         <Route path='/usuarios' element={<UsuariosLista />} />
         <Route path='/usuario/:id' element={<UsuarioDetalle />} />
+        <Route path='/favoritos' element={<Favoritos />} />
       </Route>
 
       <Route path='*' element={<NotFound />} />
