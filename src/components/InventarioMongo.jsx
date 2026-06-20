@@ -5,7 +5,7 @@ export default function InventarioMongo(){
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
 
-    const API_URL = "https://simplified-dist-aware-optimum.trycloudflare.com/api/productos"
+    const API_URL = "https://conferences-removable-special-dee.trycloudflare.com/api/productos"
 
     const obtenerProductos = async () => {
         try {
@@ -28,6 +28,54 @@ export default function InventarioMongo(){
         obtenerProductos();
     }, []);
 
+    const eliminarProducto = async (idMongo) => {
+        if (!window.confirm("¿Seguro quiere eliminar el producto?")) return;
+
+        try {
+            const respuesta = await fetch(`${API_URL}/${idMongo}`, {
+                method: 'DELETE'
+            });
+
+            if (respuesta.ok){
+                const nuevaLista = productos.filter((prod) => prod._id !== idMongo);
+                setProductos(nuevaLista);
+                alert("Producto eliminado correctamente");
+            } else {
+                alert("Error al eliminar");
+            }
+        } catch (error) {
+            console.error("Error en el servidor", error);
+        }
+    }
+
+    const aumentarPrecio = async (idMongo, precioActual) => {
+        const nuevoPrecio = precioActual + 10;
+
+        try {
+            const respuesta = await fetch(`${API_URL}/${idMongo}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ precio: nuevoPrecio})
+            });
+
+            if (respuesta.ok){
+                const listaActualizada = productos.map((prod)=>{
+                    if (prod._id === idMongo){
+                        return { ...prod, precio: nuevoPrecio}
+                    }
+                    return prod;
+                });
+
+                setProductos(listaActualizada);
+            }
+
+        } catch (error) {
+            console.error("Error al actualizar:", error);
+        }
+    };
+
     if (cargando) return <h3>Consultando datos a la API</h3>;
     if (error) return <h3 style={{color: 'red'}}>{error}</h3>;
     
@@ -38,19 +86,35 @@ export default function InventarioMongo(){
                 {productos.map((prod)=>(
                     <li key={prod._id || prod.id } style={{
                         padding: '15px',
-                        borderBottom: '1px solid #cbd5e1',
+                        border: '1px solid #cbd5e1',
                         background: 'white',
                         marginBottom: '10px',
-                        borderRadius: '5px'
+                        borderRadius: '5px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
                     }}>
-                        <strong>{prod.nombre}</strong>
-                        <p style={{ 
-                            margin: '5px 0 0 0',
-                            color: '#10b981',
-                            fontWeight: 'bold'
-                         }}>
-                            Precio: ${prod.precio}
-                         </p>
+                        <div>
+                            <strong style={{fontSize: '1.1rem', color: '#0f172a'}}>{prod.nombre}</strong>
+                            <p style={{ 
+                                margin: '5px 0 0 0',
+                                color: '#10b981',
+                                fontWeight: 'bold'
+                            }}>
+                                Precio: ${prod.precio}
+                            </p>
+                        </div>
+
+                        <div style={{display: 'flex', gap: '10px'}}>
+                            <button onClick={() => aumentarPrecio(prod._id, prod.precio)} 
+                                style={{background: '#eab308', color: 'white', border: 'none', padding: '8px 12px', cursor: 'pointer', fontWeight: 'bold'}}>
+                                ✏️ +%10
+                            </button>
+                            <button onClick={() => eliminarProducto(prod._id)}
+                                style={{ background: '#ef4444', color: 'white', border: 'none', padding: '8px 12px', cursor: 'pointer', fontWeight: 'bold'}}>
+                                🗑️ Borrar
+                            </button>
+                        </div>
                     </li>
                 ))}
             </ul>

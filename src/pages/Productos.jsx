@@ -1,4 +1,5 @@
 import InventarioMongo from "../components/InventarioMongo";
+import NuevoProductoMongo from "../components/NuevoProductoMongo";
 import ProductoCard from "../components/ProductoCard";
 
 function Productos () {
@@ -21,7 +22,9 @@ function Productos () {
                 display: 'flex', 
                 gap: '40px', 
                 marginTop: '20px'}}>
-                    <div>Funcion de agregar</div>
+                    <div>
+                        <NuevoProductoMongo />
+                    </div>
                     <div style={{flexGrow: 1}}>
                         <InventarioMongo/>
                     </div>
