@@ -6,7 +6,7 @@ export default function NuevoProductoMongo (){
     const [precio, setPrecio] = useState('');
     const [enviando, setEnviando] = useState(false);
 
-    const API_URL = 'https://conferences-removable-special-dee.trycloudflare.com/api/productos';
+    const API_URL = 'http://localhost:5000/api/productos';
 
     const manejarEnvio = async (e) => {
         e.preventDefault();

@@ -5,7 +5,7 @@ export default function InventarioMongo(){
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
 
-    const API_URL = "https://conferences-removable-special-dee.trycloudflare.com/api/productos"
+    const API_URL = "http://localhost:5000/api/productos"
 
     const obtenerProductos = async () => {
         try {
