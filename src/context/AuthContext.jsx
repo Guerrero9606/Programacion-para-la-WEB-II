@@ -3,22 +3,26 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }){
+    // 1. Empezamos DESCONECTADOS (false) por defecto
     const [usuario, setUsuario] = useState({
-        conectado: true,
-        nombre: "Juan Perez",
-        rol: "Administrador"
+        conectado: false, 
+        nombre: "",
+        rol: ""
     });
 
-    const alternarSesion = ()=>{
-        if (usuario.conectado) {
-            setUsuario({conectado: false, nombre: "", rol: ""});
-        } else {
-            setUsuario({conectado: true, nombre: "Ana Gomez", rol: "Editor"});
-        }
+    // 2. Función específica para INICIAR sesión
+    const iniciarSesion = () => {
+        setUsuario({conectado: true, nombre: "Juan Perez", rol: "Administrador"});
+    };
+
+    // 3. Función específica para CERRAR sesión
+    const cerrarSesion = () => {
+        setUsuario({conectado: false, nombre: "", rol: ""});
     };
 
     return (
-        <AuthContext.Provider value={{ usuario, alternarSesion }}>
+        // Pasamos las nuevas funciones al Provider
+        <AuthContext.Provider value={{ usuario, iniciarSesion, cerrarSesion }}>
             {children}
         </AuthContext.Provider>
     );

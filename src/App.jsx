@@ -6,16 +6,25 @@ import Productos from './pages/Productos';
 import UsuariosLista from './pages/UsuariosLista';
 import UsuarioDetalle from './pages/UsuarioDetalle';
 import Favoritos from './pages/Favoritos';
+import Login from './pages/Login';
+import Registro from './pages/Registro';
+import RutaProtegida from './components/RutaProtegida';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout />}>
-        <Route index element={<PanelGeneral />} />
-        <Route path="/productos" element={<Productos />} />
-        <Route path='/usuarios' element={<UsuariosLista />} />
-        <Route path='/usuario/:id' element={<UsuarioDetalle />} />
-        <Route path='/favoritos' element={<Favoritos />} />
+
+      <Route path='/login' element={<Login />} />
+      <Route path='/registro' element={<Registro />} />
+
+      <Route element={<RutaProtegida />}>
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<PanelGeneral />} />
+          <Route path="/productos" element={<Productos />} />
+          <Route path='/usuarios' element={<UsuariosLista />} />
+          <Route path='/usuario/:id' element={<UsuarioDetalle />} />
+          <Route path='/favoritos' element={<Favoritos />} />
+        </Route>
       </Route>
 
       <Route path='*' element={<NotFound />} />

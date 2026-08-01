@@ -5,7 +5,7 @@ import { AuthContext } from '../context/AuthContext';
 
 function Sidebar() {
     //const nombreAdmin = "Admin";
-    const { usuario, alternarSesion } = useContext(AuthContext);
+    const { usuario, cerrarSesion } = useContext(AuthContext);
 
     return (
         <aside className="sidebar">
@@ -29,7 +29,7 @@ function Sidebar() {
                 </NavLink>
             </nav>
             <div className='sidebar-footer'>
-                <button className='btn-logout' onClick={alternarSesion} style={{ background: usuario.conectado ? '#ef4444' : '#22c55e' }}>{usuario.conectado ? 'Cerrar sesion' : 'Iniciar Sesion'}</button>
+                <button className='btn-logout' onClick={cerrarSesion} style={{ background: usuario.conectado ? '#ef4444' : '#22c55e' }}>{usuario.conectado ? 'Cerrar sesion' : 'Iniciar Sesion'}</button>
             </div>
         </aside>
     );
