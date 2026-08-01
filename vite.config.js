@@ -8,4 +8,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.js",
   },
+  server: {
+    allowedHosts: ["ministers-humanitarian-strict-guitars.trycloudflare.com"]
+  }
 });
